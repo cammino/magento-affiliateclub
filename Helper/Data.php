@@ -8,10 +8,6 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     public function __construct()
     {
         $this->debugMode = true;
-
-        if($this->debugMode){
-            $this->log("---- DEBUG MODE ----", true);
-        }
     }
 
     /**
@@ -123,8 +119,6 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     */
     public function log($message, $debug = false)
     {
-        // Mostra a mensagem se o modo debug estiver habilitado OU
-        // Se a mensagem não for de debug
         if(($debug && $this->debugMode) || !$debug){
             Mage::log($message , null, "affiliateclub.log");
         }
@@ -157,8 +151,7 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
         $model = Mage::getModel('affiliateclub/affiliateclub')->addData($data);
         
         try {
-            $model->save(); 
-            // $insertId = $model->getId();
+            $model->save();
         } catch (Exception $e) {
             $this->log($e->getMessage());
         }

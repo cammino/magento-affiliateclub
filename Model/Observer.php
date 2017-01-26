@@ -38,6 +38,15 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
     public function checkOrderInvoiced(Varien_Event_Observer $observer)
     {
         $order = $observer->getEvent()->getInvoice()->getOrder();
+
+        $collection = mage::getModel('affiliateclub/affiliateclub')
+            ->getCollection()
+            ->addFieldToFilter('order_id', $order->getId());
+
+        if($collection->getSize() > 0){
+            $affiliateclub = $collection->getFirstItem();
+            $this->helper->log("Pedido: " . $order->getId() . " possui indicador: " . $affiliateclub->getIndicatorEmail());
+        }
     }
 
     /**
@@ -45,7 +54,7 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
     *
     * @return null
     */
-    public function checkOrderCreated()
+    public function checkOrderCreated(Varien_Event_Observer $observer)
     {
         $incrementId = Mage::getSingleton('checkout/session')->getLastRealOrderId();
         $order = Mage::getModel('sales/order');
@@ -59,5 +68,4 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
             $this->helper->saveAffiliateOrder($order, $indicatorEmail);
         }
     }
-
 }

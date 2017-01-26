@@ -75,22 +75,22 @@
                     </affiliateclub_check_order_invoiced>
                 </observers>
             </sales_order_invoice_pay>
-            <checkout_onepage_controller_success_action>
+            <controller_action_postdispatch_checkout_onepage_saveorder>
                 <observers>
                     <affiliateclub_check_order_created>
-                       <class>Cammino_Affiliateclub_Model_Observer</class> 
-                       <method>checkOrderCreated</method>
+                        <class>Cammino_Affiliateclub_Model_Observer</class> 
+                        <method>checkOrderCreated</method>
                     </affiliateclub_check_order_created>
                 </observers>
-            </checkout_onepage_controller_success_action>
-            <checkout_multishipping_controller_success_action>
+            </controller_action_postdispatch_checkout_onepage_saveorder>
+            <checkout_onepage_controller_success_action>
                 <observers>
-                    <affiliateclub_check_order_created_multishipping>
-                       <class>Cammino_Affiliateclub_Model_Observer</class> 
-                       <method>checkOrderCreated</method>
-                    </affiliateclub_check_order_created_multishipping>
+                    <affiliate_teste>
+                        <class>Cammino_Affiliateclub_Model_Observer</class> 
+                        <method>teste</method>
+                    </affiliate_teste>
                 </observers>
-            </checkout_multishipping_controller_success_action>
+            </checkout_onepage_controller_success_action>
         </events>
     </global>
  </config>
