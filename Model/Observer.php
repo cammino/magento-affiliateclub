@@ -46,6 +46,11 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
         if($collection->getSize() > 0){
             $affiliateclub = $collection->getFirstItem();
             $this->helper->log("Pedido: " . $order->getId() . " possui indicador: " . $affiliateclub->getIndicatorEmail());
+
+            $indicatorCoupon = $this->helper->generateCoupon();
+            $this->helper->log("Gerou o cupom: " . $indicatorCoupon);
+
+            $this->helper->saveIndicatorCoupon($order, $indicatorCoupon);
         }
     }
 
