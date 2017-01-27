@@ -7,6 +7,7 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
     public function __construct()
     {
         $this->helper = Mage::helper('affiliateclub');
+        $this->model = Mage::getModel('affiliateclub/affiliateclub');
     }
 
     /**
@@ -22,7 +23,7 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
 
             if($this->helper->existsIndicatedCouponInUrl())
             {
-                if($this->helper->applyCoupon($this->helper->getIndicatedCoupon()))
+                if($this->model->applyCoupon($this->helper->getIndicatedCoupon()))
                 {
                     Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
                 }
@@ -47,10 +48,10 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
             $affiliateclub = $collection->getFirstItem();
             $this->helper->log("Pedido: " . $order->getId() . " possui indicador: " . $affiliateclub->getIndicatorEmail());
 
-            $indicatorCoupon = $this->helper->generateCoupon();
+            $indicatorCoupon = $this->model->generateCoupon();
             $this->helper->log("Gerou o cupom: " . $indicatorCoupon);
 
-            $this->helper->saveIndicatorCoupon($order, $indicatorCoupon);
+            $this->model->saveIndicatorCoupon($order, $indicatorCoupon);
         }
     }
 
@@ -70,7 +71,7 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
         // Se esse pedido possui um indicador, salva na tabela affiliateclub
         if(strlen($indicatorEmail) > 0)
         {
-            $this->helper->saveAffiliateOrder($order, $indicatorEmail);
+            $this->model->saveAffiliateOrder($order, $indicatorEmail);
         }
     }
 }
