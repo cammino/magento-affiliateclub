@@ -14,6 +14,15 @@
         </Cammino_Affiliateclub>
     </modules>
     <global>
+        <template>
+            <email>
+                <indicator_coupon module="Cammino_Affiliateclub">
+                    <label>Indicator Coupon</label>
+                    <file>affiliateclub/indicator_coupon.html</file>
+                    <type>html</type>
+                </indicator_coupon>
+            </email>
+        </template>
     	<models>
             <affiliateclub>
                 <class>Cammino_Affiliateclub_Model</class>

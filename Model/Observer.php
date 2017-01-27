@@ -45,13 +45,15 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
             ->addFieldToFilter('order_id', $order->getId());
 
         if($collection->getSize() > 0){
+            $this->helper->log("Pedido #" . $order->getId() . " possui um indicador");
             $affiliateclub = $collection->getFirstItem();
-            $this->helper->log("Pedido: " . $order->getId() . " possui indicador: " . $affiliateclub->getIndicatorEmail());
 
+            $indicatorEmail = $affiliateclub->getIndicatorEmail();
+            $indicatorName  = $this->model->getIndicatorName();
             $indicatorCoupon = $this->model->generateCoupon();
-            $this->helper->log("Gerou o cupom: " . $indicatorCoupon);
 
-            $this->model->saveIndicatorCoupon($order, $indicatorCoupon);
+            $this->model->saveIndicatorCoupon($order, $indicatorCoupon); 
+            $this->model->sendEmailIndicatorCoupon($indicatorName, $indicatorEmail, $indicatorCoupon);
         }
     }
 
