@@ -90,7 +90,7 @@ class Cammino_Affiliateclub_Model_Affiliateclub extends Mage_Core_Model_Abstract
             $generator->setPrefix("");
             $generator->setSuffix("");
 
-            $rule = Mage::getModel('salesrule/rule')->load(3);
+            $rule = Mage::getModel('salesrule/rule')->load($this->helper->getCouponRuleId());
             $rule->setCouponCodeGenerator($generator);
             $rule->setCouponType( Mage_SalesRule_Model_Rule::COUPON_TYPE_AUTO );
 

@@ -92,14 +92,6 @@
                     </affiliateclub_check_order_created>
                 </observers>
             </controller_action_postdispatch_checkout_onepage_saveorder>
-            <checkout_onepage_controller_success_action>
-                <observers>
-                    <affiliate_teste>
-                        <class>Cammino_Affiliateclub_Model_Observer</class> 
-                        <method>teste</method>
-                    </affiliate_teste>
-                </observers>
-            </checkout_onepage_controller_success_action>
         </events>
     </global>
  </config>

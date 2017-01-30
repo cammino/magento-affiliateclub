@@ -4,10 +4,36 @@
 */
 class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
 {
-
-    public function __construct()
+    /**
+    * Verifica se o módulo esta ativo no admin
+    *
+    * @return boolean
+    */
+    public function isModuleEnable()
     {
-        $this->enableLog = true;
+        return (bool) Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_active');
+    }
+
+    /**
+    * Gera link de compartilhamento para os indicadores
+    *
+    * @return String
+    */
+    public function getShareLink($indicatorEmail)
+    {
+        $coupon = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_indicated_coupon');
+        $url = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_share_url');
+        return $url . "?indicatorEmail=" . $indicatorEmail . "&indicatedCoupon=" . $coupon;
+    }
+
+    /**
+    * Retorna o ID da regra de promoção usado para gerar os cupons de desconto
+    *
+    * @return int
+    */
+    public function getCouponRuleId()
+    {
+        return (int) Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_indicator_coupon_rule_id');
     }
 
     /**
@@ -55,7 +81,7 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     /**
     * Retorna o email do indicador que esta na url
     *
-    * @return boolean
+    * @return String
     */
     public function getIndicatorEmail()
     {
@@ -66,7 +92,7 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     /**
     * Retorna o código do cupom do indicado que esta na url
     *
-    * @return string
+    * @return String
     */
     public function getIndicatedCoupon()
     {
@@ -77,7 +103,7 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     /**
     * Retorna o código do cupom do indicador que esta na url
     *
-    * @return string
+    * @return String
     */
     public function getIndicatorCoupon()
     {
@@ -95,13 +121,12 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
         $email = $this->getIndicatorEmail();
         $_SESSION['affiliateclub_indicator_email'] = $email;
         $this->log("Salvou email " . $email . " na sessao");
-        return true;
     }
 
     /**
     * Retorna o indicador que esta na sessão
     *
-    * @return boolean
+    * @return String
     */
     public function getIndicatorEmailInSession()
     {
@@ -115,7 +140,9 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     */
     public function log($message)
     {
-        if($this->enableLog){
+        $enable = (bool) Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_log_active');
+
+        if($enable){
             Mage::log($message , null, "affiliateclub.log");
         }
     }

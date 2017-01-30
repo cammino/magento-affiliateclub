@@ -1,0 +1,22 @@
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <affiliateclub translate="title" module="affiliateclub">
+                                        <title>affiliateclub</title>
+                                        <sort_order>10</sort_order>
+                                    </affiliateclub>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

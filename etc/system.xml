@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <affiliateclub translate="label" module="affiliateclub">
+            <label>Affiliateclub</label>
+            <sort_order>100</sort_order>
+        </affiliateclub>
+    </tabs>
+    <sections>
+        <affiliateclub translate="label" module="affiliateclub">
+            <label>General</label>
+            <tab>affiliateclub</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+ 
+            <groups>
+                <affiliateclub_group translate="label" module="affiliateclub">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+ 
+                    <fields>
+                        <affiliateclub_active translate="label">
+                            <label>Habilitado</label>
+                            <comment></comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </affiliateclub_active>
+                        <affiliateclub_indicated_coupon translate="label">
+                            <label>Cupom do Indicado</label>
+                            <comment>Cógido do cupom que será enviado para os indicados ao gerar os links de compartilhamento (ex: 15OFF)</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </affiliateclub_indicated_coupon>
+                        <affiliateclub_indicator_coupon_rule_id translate="label">
+                            <label>ID da Regra de Promoção</label>
+                            <comment>ID da regra de promoção usado para gerar os cupons de desconto para os indicadores (ex: 2)</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </affiliateclub_indicator_coupon_rule_id>
+                        <affiliateclub_share_url translate="label">
+                            <label>URL de Compartilhamento</label>
+                            <comment>URL usada ao gerar os links de compartilhamento</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </affiliateclub_share_url>
+                        <affiliateclub_log_active translate="label">
+                            <label>Ativar Log</label>
+                            <comment>Log de depuração no arquivo /var/log/affiliateclub.log</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </affiliateclub_log_active>
+                    </fields>
+                </affiliateclub_group>
+            </groups>
+        </affiliateclub>
+    </sections>
+</config>
