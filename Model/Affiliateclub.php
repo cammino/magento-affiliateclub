@@ -29,7 +29,8 @@ class Cammino_Affiliateclub_Model_Affiliateclub extends Mage_Core_Model_Abstract
             $cart->getShippingAddress()->setCollectShippingRates(true);
             $cart->setCouponCode(strlen($couponCode) ? $couponCode : '')->collectTotals()->save();
 
-            $this->helper->log("Aplicou o cupom do indicado: " . $couponCode);
+            $this->helper->log("Aplicou o cupom: " . $couponCode);
+            return true;
 
         }catch (Mage_Core_Exception $e) {
             $this->helper->log("Erro ao aplicar o cupom: " . $couponCode . ", Detalhes erro: " . $e);

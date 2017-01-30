@@ -39,6 +39,20 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+    * Verifica se tem um cupom de desconto para o indicador na url
+    *
+    * @return boolean
+    */
+    public function existsIndicatorCouponInUrl()
+    {
+        if(isset($_GET["indicatorCoupon"]) && strlen($_GET["indicatorCoupon"]) > 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
     * Retorna o email do indicador que esta na url
     *
     * @return boolean
@@ -58,6 +72,17 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     {
         $this->log("Existe cupom desconto para o indicado: " . $_GET["indicatedCoupon"]);
         return $_GET["indicatedCoupon"];
+    }
+
+    /**
+    * Retorna o código do cupom do indicador que esta na url
+    *
+    * @return string
+    */
+    public function getIndicatorCoupon()
+    {
+        $this->log("Existe cupom desconto para o indicador: " . $_GET["indicatorCoupon"]);
+        return $_GET["indicatorCoupon"];
     }
 
     /**

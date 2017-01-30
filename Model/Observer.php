@@ -21,13 +21,15 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
         {
             $this->helper->setIndicatorEmailInSession();
 
-            if($this->helper->existsIndicatedCouponInUrl())
+            if($this->helper->existsIndicatedCouponInUrl() && $this->model->applyCoupon($this->helper->getIndicatedCoupon()))
             {
-                if($this->model->applyCoupon($this->helper->getIndicatedCoupon()))
-                {
-                    Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
-                }
+                Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
             }
+        }
+
+        if($this->helper->existsIndicatorCouponInUrl() && $this->model->applyCoupon($this->helper->getIndicatorCoupon()))
+        {
+            Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
         }
     }
 
