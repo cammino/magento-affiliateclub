@@ -94,4 +94,23 @@
             </controller_action_postdispatch_checkout_onepage_saveorder>
         </events>
     </global>
+    <frontend>
+        <layout>
+            <updates>
+                <affiliateclub>
+                    <file>affiliateclub.xml</file>
+                </affiliateclub>
+            </updates>
+        </layout>
+
+        <routers>
+            <affiliateclub>
+                <use>standard</use>
+                <args>
+                    <module>Cammino_Affiliateclub</module>
+                    <frontName>affiliateclub</frontName>
+                </args>
+            </affiliateclub>
+        </routers>
+    </frontend>
  </config>
