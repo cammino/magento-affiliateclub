@@ -21,6 +21,11 @@
                     <file>affiliateclub/indicator_coupon.html</file>
                     <type>html</type>
                 </indicator_coupon>
+                <indicated_coupon module="Cammino_Affiliateclub">
+                    <label>Indicator Coupon</label>
+                    <file>affiliateclub/indicated_coupon.html</file>
+                    <type>html</type>
+                </indicated_coupon>
             </email>
         </template>
     	<models>

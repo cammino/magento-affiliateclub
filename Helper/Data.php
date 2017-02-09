@@ -100,6 +100,16 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
+    * Retorna o código de desconto padrão do indicador que esta configurado no admin
+    *
+    * @return String
+    */
+    public function getDefaultIndicatedCoupon()
+    {
+        return Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_indicated_coupon');
+    }
+
+    /**
     * Sava o email do indicador na sessão
     *
     * @return null
@@ -119,6 +129,25 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     public function getIndicatorEmailInSession()
     {
         return $_SESSION['affiliateclub_indicator_email'];
+    }
+
+    /**
+    * Retorna a url de compartilhamento
+    *
+    * @return String
+    */
+    public function getShareLink(){
+        $coupon = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_indicated_coupon');
+        $url = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_share_url');
+        return urlencode($url . $this->getCustomerLoggedEmail() . "&indicatedCoupon=" . $coupon);
+    }
+
+    public function getCustomerLoggedEmail(){
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+            return "?indicatorEmail=" . $customer = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
+        }else{
+            return "";
+        }
     }
 
     /**
