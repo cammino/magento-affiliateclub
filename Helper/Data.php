@@ -15,18 +15,6 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
     /**
-    * Gera link de compartilhamento para os indicadores
-    *
-    * @return String
-    */
-    public function getShareLink($indicatorEmail)
-    {
-        $coupon = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_indicated_coupon');
-        $url = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_share_url');
-        return $url . "?indicatorEmail=" . $indicatorEmail . "&indicatedCoupon=" . $coupon;
-    }
-
-    /**
     * Retorna o ID da regra de promoção usado para gerar os cupons de desconto
     *
     * @return int
