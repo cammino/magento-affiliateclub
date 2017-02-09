@@ -46,4 +46,10 @@ class Cammino_Affiliateclub_IndiqueController extends Mage_Core_Controller_Front
             return false;
         }
 	}
+
+	public function loginAction(){
+		$session = Mage::getSingleton('core/session');
+		$session->setAffiliateclubLogin(true);
+		$this->_redirect('customer/account/login');
+	}
 }

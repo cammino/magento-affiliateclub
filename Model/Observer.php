@@ -88,4 +88,15 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
             }
         }
     }
+
+    public function customerLogin(Varien_Event_Observer $observer)
+    {
+        $core = Mage::getSingleton('core/session');
+        if($core->getAffiliateclubLogin() != NULL){
+            $core->unsAffiliateclubLogin();
+            $session = Mage::getSingleton('customer/session');
+            $session->setAfterAuthUrl(Mage::getBaseUrl() . "affiliateclub/indique");
+            $session->setBeforeAuthUrl('');
+        }
+    }
 }

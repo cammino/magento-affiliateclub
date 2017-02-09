@@ -97,6 +97,14 @@
                     </affiliateclub_check_order_created>
                 </observers>
             </controller_action_postdispatch_checkout_onepage_saveorder>
+            <customer_login>
+                <observers>
+                    <affiliateclub_customer_login>
+                        <class>Cammino_Affiliateclub_Model_Observer</class>
+                        <method>customerLogin</method>
+                    </affiliateclub_customer_login>
+                </observers>
+            </customer_login>
         </events>
     </global>
     <frontend>
