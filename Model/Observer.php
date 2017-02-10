@@ -23,15 +23,15 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
             {
                 $this->helper->setIndicatorEmailInSession();
 
-                if($this->helper->existsIndicatedCouponInUrl() && $this->model->applyCoupon($this->helper->getIndicatedCoupon()))
+                if($this->helper->existsIndicatedCouponInUrl() && $this->model->setCoupon($this->helper->getIndicatedCoupon()))
                 {
-                    Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
+                    Mage::app()->getResponse()->setRedirect($this->helper->getRedirectPage());
                 }
             }
 
-            if($this->helper->existsIndicatorCouponInUrl() && $this->model->applyCoupon($this->helper->getIndicatorCoupon()))
+            if($this->helper->existsIndicatorCouponInUrl() && $this->model->setCoupon($this->helper->getIndicatorCoupon()))
             {
-                Mage::app()->getResponse()->setRedirect(Mage::getBaseUrl());
+                Mage::app()->getResponse()->setRedirect($this->helper->getRedirectPage());
             }
         }
     }
@@ -98,5 +98,21 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
             $session->setAfterAuthUrl(Mage::getBaseUrl() . "affiliateclub/indique");
             $session->setBeforeAuthUrl('');
         }
+    }
+
+    public function applyCoupon(Varien_Event_Observer $observer)
+    {
+        $session = Mage::getSingleton('core/session');
+        $couponCode = (string)$session->getCustomCouponCode();
+
+        if (!$couponCode or !strlen($couponCode)) {
+            return;
+        }
+
+        $session = Mage::getSingleton('checkout/session');
+        $cart = Mage::getSingleton('checkout/cart')->getQuote();
+        $cart->getShippingAddress()->setCollectShippingRates(true);
+        $cart->setCouponCode(strlen($couponCode) ? $couponCode : '')->collectTotals()->save();
+        $this->helper->log("Aplicou o cupom: " . $couponCode);
     }
 }

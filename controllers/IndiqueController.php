@@ -4,14 +4,17 @@
 */
 class Cammino_Affiliateclub_IndiqueController extends Mage_Core_Controller_Front_Action
 {
-	public function indexAction(){
+
+	public function indexAction()
+	{
 		$block = $this->getLayout()->createBlock('affiliateclub/indique');
 		$this->loadLayout();
 		$this->getLayout()->getBlock('content')->append($block);
 		$this->renderLayout();
 	}
 
-	public function emailAction(){
+	public function emailAction()
+	{
 		$helper = Mage::helper('affiliateclub');
 
 		try{
@@ -43,7 +46,8 @@ class Cammino_Affiliateclub_IndiqueController extends Mage_Core_Controller_Front
         return;
 	}
 
-	public function loginAction(){
+	public function loginAction()
+	{
 		$session = Mage::getSingleton('core/session');
 		$session->setAffiliateclubLogin(true);
 		$this->_redirect('customer/account/login');

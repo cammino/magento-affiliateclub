@@ -105,6 +105,15 @@
                     </affiliateclub_customer_login>
                 </observers>
             </customer_login>
+            <checkout_cart_add_product_complete>
+                <observers>
+                    <affiliateclub_apply_coupon>
+                        <type>singleton</type>
+                        <class>Cammino_Affiliateclub_Model_Observer</class>
+                        <method>applyCoupon</method>
+                    </affiliateclub_apply_coupon>
+                </observers>
+            </checkout_cart_add_product_complete>
         </events>
     </global>
     <frontend>

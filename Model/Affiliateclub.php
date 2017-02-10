@@ -11,11 +11,11 @@ class Cammino_Affiliateclub_Model_Affiliateclub extends Mage_Core_Model_Abstract
 	}
 
 	/**
-    * Aplica o cupom de desconto manualmente
+    * Salva o cupom de desconto na sessão
     *
     * @return boolean
     */
-    public function applyCoupon($couponCode)
+    public function setCoupon($couponCode)
     {
         $couponCode = (string) $couponCode;
 
@@ -24,19 +24,15 @@ class Cammino_Affiliateclub_Model_Affiliateclub extends Mage_Core_Model_Abstract
         }
 
         try{
-            $session = Mage::getSingleton('checkout/session');
-            $cart = Mage::getSingleton('checkout/cart')->getQuote();
-            $cart->getShippingAddress()->setCollectShippingRates(true);
-            $cart->setCouponCode(strlen($couponCode) ? $couponCode : '')->collectTotals()->save();
-
-            $this->helper->log("Aplicou o cupom: " . $couponCode);
+            Mage::getSingleton('core/session')->setCustomCouponCode($couponCode);
+            $this->helper->log("Salvou o cupom: " . $couponCode . " na sessão");
             return true;
-
         }catch (Mage_Core_Exception $e) {
-            $this->helper->log("Erro ao aplicar o cupom: " . $couponCode . ", Detalhes erro: " . $e);
+            $this->helper->log("Erro ao salvar o cupom: " . $couponCode . ", Detalhes erro: " . $e);
         } catch (Exception $e) {
-            $this->helper->log("Erro ao aplicar o cupom: " . $couponCode . ", Detalhes erro: " . $e);
+            $this->helper->log("Erro ao salvar o cupom: " . $couponCode . ", Detalhes erro: " . $e);
         }
+        return false;
     }
 
 
@@ -106,7 +102,7 @@ class Cammino_Affiliateclub_Model_Affiliateclub extends Mage_Core_Model_Abstract
     }
 
     /**
-    * Insere o cupom gerado para o indicador
+    * Sava o cupom gerado para o indicador no banco
     *
     * @return boolean
     */
@@ -129,6 +125,11 @@ class Cammino_Affiliateclub_Model_Affiliateclub extends Mage_Core_Model_Abstract
         }        
     }
 
+    /**
+    * Envia email para o indicador com seu cupom de desconto
+    *
+    * @return null
+    */
     public function sendEmailIndicatorCoupon($indicatorName, $indicatorEmail, $indicatorCoupon)
     {
     	try{
@@ -162,7 +163,7 @@ class Cammino_Affiliateclub_Model_Affiliateclub extends Mage_Core_Model_Abstract
     /**
     * Retorna o nome do indicador
     *
-    * @return null
+    * @return String
     */
     public function getIndicatorName($indicatorEmail)
     {
@@ -170,7 +171,7 @@ class Cammino_Affiliateclub_Model_Affiliateclub extends Mage_Core_Model_Abstract
         if(strlen($customer->getName()) > 0){
             return $customer->getName();
         }else{
-            return "sem nome";
+            return "";
         }
     }
 }

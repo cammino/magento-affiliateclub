@@ -73,6 +73,7 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     */
     public function getIndicatorEmail()
     {
+        $this->log("---------------------------------");
         $this->log("Existe email do indicador: " . $_GET["indicatorEmail"]);
         return $_GET["indicatorEmail"];
     }
@@ -95,6 +96,7 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     */
     public function getIndicatorCoupon()
     {
+        $this->log("---------------------------------");
         $this->log("Existe cupom desconto para o indicador: " . $_GET["indicatorCoupon"]);
         return $_GET["indicatorCoupon"];
     }
@@ -136,22 +138,44 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     *
     * @return String
     */
-    public function getShareLink(){
+    public function getShareLink()
+    {
         $coupon = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_indicated_coupon');
-        $url = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_share_url');
-        return $url . $this->getCustomerLoggedEmail() . "&indicatedCoupon=" . $coupon;
+        return Mage::getBaseUrl() . "?indicatorEmail=" . $this->getCustomerLoggedEmail() . "&indicatedCoupon=" . $coupon;
     }
 
-    public function getCustomerLoggedEmail(){
+    /**
+    * Retorna a url que o indicado sera redirecionado após seu cupom ser aplicado
+    *
+    * @return String
+    */
+    public function getRedirectPage()
+    {
+        return Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_share_url');
+    }
+
+    /**
+    * Retorna o email do usuario logado
+    *
+    * @return String
+    */
+    public function getCustomerLoggedEmail()
+    {
         if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-            return "?indicatorEmail=" . Mage::getSingleton('customer/session')->getCustomer()->getEmail();
+            return Mage::getSingleton('customer/session')->getCustomer()->getEmail();
         }else{
             return "";
         }
     }
 
-    public function getCustomerLoggedName(){
-        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+    /**
+    * Retorna o nome do usuario logado
+    *
+    * @return String
+    */
+    public function getCustomerLoggedName()
+    {
+        if (Mage::getSingleton('customer/session')->isLoggedIn()){
             return Mage::getSingleton('customer/session')->getCustomer()->getName();
         }else{
             return "";
