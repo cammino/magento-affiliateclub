@@ -13,8 +13,6 @@ class Cammino_Affiliateclub_IndiqueController extends Mage_Core_Controller_Front
 
 	public function emailAction(){
 		$helper = Mage::helper('affiliateclub');
-		echo "ok";
-		return;
 
 		try{
 			$mailer = Mage::getModel('core/email_template_mailer');
@@ -29,22 +27,20 @@ class Cammino_Affiliateclub_IndiqueController extends Mage_Core_Controller_Front
 			$mailer->setStoreId($storeId);
 			$mailer->setTemplateId("indicated_coupon");
 			$mailer->setTemplateParams(array(
-					'indicatedCoupon' => $helper->getDefaultIndicatedCoupon(),
-					'indicatedLink'   => $helper->getShareLink()
+					'indicatorName' 	=> $helper->getCustomerLoggedName(),
+					'indicatedLink'   	=> $helper->getShareLink()
 				)
 			);
 
 			if($mailer->send()){
-				echo "Emails enviados";
-				return true;
+				echo "ok";
 			}else{
-				echo "nao pode enviar";
-				return false;
+				echo "não pode enviar";
 			}
 		}catch (Exception $e) {
             echo $e->getMessage();
-            return false;
         }
+        return;
 	}
 
 	public function loginAction(){

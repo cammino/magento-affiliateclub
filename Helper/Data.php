@@ -139,12 +139,20 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     public function getShareLink(){
         $coupon = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_indicated_coupon');
         $url = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_share_url');
-        return urlencode($url . $this->getCustomerLoggedEmail() . "&indicatedCoupon=" . $coupon);
+        return $url . $this->getCustomerLoggedEmail() . "&indicatedCoupon=" . $coupon;
     }
 
     public function getCustomerLoggedEmail(){
         if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-            return "?indicatorEmail=" . $customer = Mage::getSingleton('customer/session')->getCustomer()->getEmail();
+            return "?indicatorEmail=" . Mage::getSingleton('customer/session')->getCustomer()->getEmail();
+        }else{
+            return "";
+        }
+    }
+
+    public function getCustomerLoggedName(){
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+            return Mage::getSingleton('customer/session')->getCustomer()->getName();
         }else{
             return "";
         }
