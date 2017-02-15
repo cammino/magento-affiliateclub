@@ -141,7 +141,8 @@ class Cammino_Affiliateclub_Helper_Data extends Mage_Core_Helper_Abstract
     public function getShareLink()
     {
         $coupon = Mage::getStoreConfig('affiliateclub/affiliateclub_group/affiliateclub_indicated_coupon');
-        return Mage::getBaseUrl() . "?indicatorEmail=" . $this->getCustomerLoggedEmail() . "&indicatedCoupon=" . $coupon;
+        $link = Mage::getBaseUrl() . "?indicatorEmail=" . $this->getCustomerLoggedEmail() . "&indicatedCoupon=" . $coupon;
+        return urlencode($link);
     }
 
     /**
