@@ -56,12 +56,20 @@ class Cammino_Affiliateclub_Model_Observer extends Varien_Object
                 $this->helper->log("Pedido #" . $order->getId() . " possui um indicador");
                 $affiliateclub = $collection->getFirstItem();
 
-                $indicatorEmail = $affiliateclub->getIndicatorEmail();
                 $indicatorName  = $this->model->getIndicatorName();
-                $indicatorCoupon = $this->model->generateCoupon();
+                $indicatorEmail = $affiliateclub->getIndicatorEmail();
+                $indicatedEmail = $affiliateclub->getIndicatedEmail();
+
+                // Só gera um cupom de desconto único se a pessoa não indicou ela mesma.
+                if($indicatorEmail != $indicatedEmail)
+                {
+                    $indicatorCoupon = $this->model->generateCoupon();
+                    $this->model->sendEmailIndicatorCoupon($indicatorName, $indicatorEmail, $indicatorCoupon);
+                }else{
+                    $indicatorCoupon = "cupom inválido";
+                }
 
                 $this->model->saveIndicatorCoupon($order, $indicatorCoupon); 
-                $this->model->sendEmailIndicatorCoupon($indicatorName, $indicatorEmail, $indicatorCoupon);
             }
         }
     }
